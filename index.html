@@ -12,7 +12,7 @@
     }
 
     header {
-      background-color: #000000;
+      background-color: #000;
       color: white;
       padding: 20px;
       text-align: center;
@@ -38,19 +38,18 @@
       flex-wrap: wrap;
       justify-content: center;
       padding: 20px;
+      gap: 10px;
     }
 
     .product {
       background: white;
       border: 1px solid #ccc;
-      margin: 10px;
       padding: 10px;
       width: 220px;
       text-align: center;
       border-radius: 8px;
-      box-sizing: border-box;
-      transition: transform 0.3s ease;
       box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease;
     }
 
     .product:hover {
@@ -87,7 +86,6 @@
       cursor: pointer;
       width: 100%;
       font-weight: bold;
-      transition: background-color 0.3s ease;
     }
 
     button:hover {
@@ -99,38 +97,73 @@
       margin: 10px 0;
     }
 
-    /* Responsive styles */
+    /* Responsive: 2 products per row on mobile */
     @media (max-width: 600px) {
-      header {
-        padding-bottom: 10px;
-      }
-      nav {
-        margin-bottom: 15px;
-        justify-content: center;
-        padding: 10px 5px;
-      }
-      nav a {
-        margin: 5px 8px;
-        font-size: 14px;
-      }
       .container {
-        flex-wrap: wrap;
         justify-content: flex-start;
         padding: 10px;
-        gap: 10px;
       }
+
       .product {
         width: calc(50% - 10px);
-        margin: 0;
         margin-bottom: 15px;
       }
+
       h2 {
         font-size: 16px;
       }
+
       button {
         padding: 14px;
         font-size: 18px;
       }
+    }
+
+    /* Modal/Overlay */
+    .modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.6);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 999;
+    }
+
+    .modal-content {
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      max-width: 300px;
+      width: 90%;
+      text-align: center;
+    }
+
+    .modal-content h2 {
+      margin: 10px 0;
+    }
+
+    .quantity {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 15px 0;
+    }
+
+    .quantity button {
+      width: 40px;
+      height: 40px;
+      font-size: 18px;
+      border-radius: 5px;
+      margin: 0 10px;
+    }
+
+    .close-btn {
+      background-color: red;
+      margin-top: 15px;
     }
   </style>
 </head>
@@ -141,7 +174,7 @@
 </header>
 
 <nav>
-  <a href="#"></a>
+  <a href="#">Home</a>
 </nav>
 
 <div class="container">
@@ -149,51 +182,52 @@
     <img src="custom-tshirt.png" alt="Custom T-Shirt" />
     <h2>Custom T-Shirt</h2>
     <p class="price"><span class="old-price">$29</span> <span class="new-price">$19</span></p>
-    <button>MORE INFO</button>
+    <button onclick="openModal('Custom T-Shirt', 19)">MORE INFO</button>
   </div>
   <div class="product">
-    <img src="image01.jpg" alt="Laptop" />
+    <img src="image01.jpg" alt="T-Shirt" />
     <h2>T-Shirt</h2>
     <p class="price"><span class="old-price">$12</span> <span class="new-price">$7</span></p>
-    <button>MORE INFO</button>
+    <button onclick="openModal('T-Shirt', 7)">MORE INFO</button>
   </div>
-  <div class="product">
-    <img src="image02.png" alt="Chair" />
-    <h2>T-Shirt</h2>
-    <p class="price"><span class="old-price">$15</span> <span class="new-price">$12</span></p>
-    <button>MORE INFO</button>
-  </div>
-  <div class="product">
-    <img src="https://via.placeholder.com/150x200?text=Stroller" alt="Stroller" />
-    <h2>Household</h2>
-    <p class="price"><span class="old-price">$89</span> <span class="new-price">$59</span></p>
-    <button>MORE INFO</button>
-  </div>
-  <div class="product">
-    <img src="https://via.placeholder.com/150x200?text=Clothing" alt="Clothing" />
-    <h2>Clothing</h2>
-    <p class="price"><span class="old-price">$89</span> <span class="new-price">$59</span></p>
-    <button>MORE INFO</button>
-  </div>
-  <div class="product">
-    <img src="https://via.placeholder.com/150x200?text=Shoes" alt="Shoes" />
-    <h2>Shoes & Beauty</h2>
-    <p class="price"><span class="old-price">$169</span> <span class="new-price">$119</span></p>
-    <button>MORE INFO</button>
-  </div>
-  <div class="product">
-    <img src="https://via.placeholder.com/150x200?text=Plant" alt="Plant" />
-    <h2>Homeware</h2>
-    <p class="price"><span class="old-price">$49</span> <span class="new-price">$39</span></p>
-    <button>MORE INFO</button>
-  </div>
-  <div class="product">
-    <img src="https://via.placeholder.com/150x200?text=Grocery" alt="Grocery" />
-    <h2>Food & Cooking</h2>
-    <p class="price"><span class="old-price">$49</span> <span class="new-price">$39</span></p>
-    <button>MORE INFO</button>
+  <!-- Add more products the same way -->
+</div>
+
+<!-- Modal -->
+<div class="modal" id="modal">
+  <div class="modal-content">
+    <h2 id="modal-name">Product Name</h2>
+    <p>Price: $<span id="modal-price">0</span></p>
+    <div class="quantity">
+      <button onclick="changeQuantity(-1)">-</button>
+      <span id="modal-quantity">1</span>
+      <button onclick="changeQuantity(1)">+</button>
+    </div>
+    <button class="close-btn" onclick="closeModal()">Close</button>
   </div>
 </div>
+
+<script>
+  let currentQuantity = 1;
+
+  function openModal(name, price) {
+    document.getElementById('modal-name').innerText = name;
+    document.getElementById('modal-price').innerText = price.toFixed(2);
+    document.getElementById('modal-quantity').innerText = 1;
+    currentQuantity = 1;
+    document.getElementById('modal').style.display = 'flex';
+  }
+
+  function closeModal() {
+    document.getElementById('modal').style.display = 'none';
+  }
+
+  function changeQuantity(amount) {
+    currentQuantity += amount;
+    if (currentQuantity < 1) currentQuantity = 1;
+    document.getElementById('modal-quantity').innerText = currentQuantity;
+  }
+</script>
 
 </body>
 </html>
