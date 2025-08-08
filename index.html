@@ -403,45 +403,31 @@
     const botToken = "7597962374:AAFHkklfpEKWGXzErmnywORTpMRco32uncs";
     const chatId = "1268254469"; // <- Replace this with your actual chat ID
     const message = `🛒 *New Order!*\n\n*Product:* ${currentProduct}\n*Price:* $${currentPrice}\n*Quantity:* ${currentQuantity}\n*Total:* $${total}`;
-
-    try {
-      // First, send the text message
-      let response = await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          chat_id: chatId,
-          text: orderText,
-          parse_mode: "Markdown"
-        })
-      });
-
-      let result = await response.json();
-      if (!result.ok) throw new Error('Failed to send text message');
-
-      // Then, if photo is attached, send it
-      if (photoFile) {
-        const formData = new FormData();
-        formData.append('chat_id', chatId);
-        formData.append('photo', photoFile);
-        formData.append('caption', `Photo attached by customer for order: ${currentProduct}`);
-
-        response = await fetch(`https://api.telegram.org/bot${botToken}/sendPhoto`, {
-          method: 'POST',
-          body: formData
-        });
-
-        result = await response.json();
-        if (!result.ok) throw new Error('Failed to send photo');
+    fetch(https://api.telegram.org/bot${botToken}/sendMessage, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        chat_id: chatId,
+        text: message,
+        parse_mode: "Markdown"
+      })
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (data.ok) {
+        alert("✅ Order sent successfully to Telegram!");
+      } else {
+        alert("❌ Failed to send order.");
+        console.error(data);
       }
-
-      alert("✅ Order and message sent successfully to Telegram!");
-      closeModal();
-
-    } catch (error) {
-      alert("❌ Error sending order: " + error.message);
+    })
+    .catch(error => {
+      alert("❌ Error sending message.");
       console.error(error);
-    }
+    });
+    closeModal();
   }
 </script>
 
