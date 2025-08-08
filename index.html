@@ -194,7 +194,42 @@
     <button>MORE INFO</button>
   </div>
 </div>
+  <div class="modal" id="modal">
+  <div class="modal-content">
+    <h2 id="modal-name">Product Name</h2>
+    <p>Price: $<span id="modal-price">0</span></p>
+    <div class="quantity">
+      <button onclick="changeQuantity(-1)">-</button>
+      <span id="modal-quantity">1</span>
+      <button onclick="changeQuantity(1)">+</button>
+    </div>
+    <button class="close-btn" onclick="closeModal()">Close</button>
+  </div>
+</div>
+
+<script>
+  let currentQuantity = 1;
+
+  function openModal(name, price) {
+    document.getElementById('modal-name').innerText = name;
+    document.getElementById('modal-price').innerText = price.toFixed(2);
+    document.getElementById('modal-quantity').innerText = 1;
+    currentQuantity = 1;
+    document.getElementById('modal').style.display = 'flex';
+  }
+
+  function closeModal() {
+    document.getElementById('modal').style.display = 'none';
+  }
+
+  function changeQuantity(amount) {
+    currentQuantity += amount;
+    if (currentQuantity < 1) currentQuantity = 1;
+    document.getElementById('modal-quantity').innerText = currentQuantity; }
+</script>
+
 
 </body>
 </html>
+
 
