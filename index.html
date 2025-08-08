@@ -225,11 +225,17 @@
   function changeQuantity(amount) {
     currentQuantity += amount;
     if (currentQuantity < 1) currentQuantity = 1;
-    document.getElementById('modal-quantity').innerText = currentQuantity; }
+    document.getElementById('modal-quantity').innerText = currentQuantity;
+  function checkout() {
+    const total = (currentPrice * currentQuantity).toFixed(2);
+    alert(`✅ Checkout Summary:\n\nProduct: ${currentProduct}\nPrice: $${currentPrice}\nQuantity: ${currentQuantity}\nTotal: $${total}`);
+    closeModal();
+  }
 </script>
 
 
 </body>
 </html>
+
 
 
