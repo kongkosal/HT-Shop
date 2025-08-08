@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>HT SHOP</title>
   <style>
     body {
@@ -48,8 +49,8 @@
       text-align: center;
       border-radius: 8px;
       box-sizing: border-box;
-      /* For smooth scaling */
       transition: transform 0.3s ease;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
     }
 
     .product:hover {
@@ -69,6 +70,7 @@
     .old-price {
       text-decoration: line-through;
       color: #888;
+      margin-right: 8px;
     }
 
     .new-price {
@@ -85,6 +87,11 @@
       cursor: pointer;
       width: 100%;
       font-weight: bold;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: darkorange;
     }
 
     h2 {
@@ -94,34 +101,33 @@
 
     /* Responsive styles */
     @media (max-width: 600px) {
+      header {
+        padding-bottom: 10px;
+      }
       nav {
+        margin-bottom: 15px;
         justify-content: center;
         padding: 10px 5px;
       }
-
       nav a {
         margin: 5px 8px;
         font-size: 14px;
       }
-
       .container {
         flex-direction: column;
         padding: 10px;
       }
-
       .product {
         width: 100%;
         max-width: 320px;
         margin: 10px auto;
       }
-
       h2 {
         font-size: 16px;
       }
-
       button {
-        padding: 12px;
-        font-size: 16px;
+        padding: 14px;
+        font-size: 18px;
       }
     }
   </style>
@@ -135,6 +141,7 @@
 <nav>
   <a href="#"></a>
 </nav>
+
 <div class="container">
   <div class="product">
     <img src="custom-tshirt.png" alt="Custom T-Shirt" />
