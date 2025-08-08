@@ -396,10 +396,39 @@
 
   function checkout() {
     const total = (currentPrice * currentQuantity).toFixed(2);
+    const message = `🛒 *New Order!*\n\n*Product:* ${currentProduct}\n*Price:* $${currentPrice}\n*Quantity:* ${currentQuantity}\n*Total:* $${total}`;
     alert(`✅ Checkout Summary:\n\nProduct: ${currentProduct}\nPrice: $${currentPrice}\nQuantity: ${currentQuantity}\nTotal: $${total}`);
+    const botToken = "7597962374:AAFHkklfpEKWGXzErmnywORTpMRco32uncs";
+    const chatId = "1268254469"; // <- Replace this with your actual chat ID
+
+    fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        chat_id: chatId,
+        text: message,
+        parse_mode: "Markdown"
+      })
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (data.ok) {
+        alert("✅ Order sent successfully to Telegram!");
+      } else {
+        alert("❌ Failed to send order.");
+        console.error(data);
+      }
+    })
+    .catch(error => {
+      alert("❌ Error sending message.");
+      console.error(error);
+    });
     closeModal();
   }
 </script>
 
 </body>
 </html>
+
