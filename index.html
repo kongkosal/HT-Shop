@@ -397,12 +397,10 @@
   function checkout() {
     const total = (currentPrice * currentQuantity).toFixed(2);
     const userMessage = document.getElementById('modal-message').value.trim();
-    const photoInput = document.getElementById('modal-photo');
-    const photoFile = photoInput.files[0];
+    const message = `🛒 *New Order!*\n\n*Product:* ${currentProduct}\n*Price:* $${currentPrice}\n*Quantity:* ${currentQuantity}\n*Total:* $${total}`;
     alert(`✅ Checkout Summary:\n\nProduct: ${currentProduct}\nPrice: $${currentPrice}\nQuantity: ${currentQuantity}\nTotal: $${total}`);
     const botToken = "7597962374:AAFHkklfpEKWGXzErmnywORTpMRco32uncs";
     const chatId = "1268254469"; // <- Replace this with your actual chat ID
-    const message = `🛒 *New Order!*\n\n*Product:* ${currentProduct}\n*Price:* $${currentPrice}\n*Quantity:* ${currentQuantity}\n*Total:* $${total}`;
     fetch(https://api.telegram.org/bot${botToken}/sendMessage, {
       method: "POST",
       headers: {
@@ -433,6 +431,7 @@
 
 </body>
 </html>
+
 
 
 
