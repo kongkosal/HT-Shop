@@ -370,13 +370,11 @@
   let currentQuantity = 1;
   let currentProduct = '';
   let currentPrice = 0;
-  let currentImage = '';
 
-  function openModal(name, price, imageUrl) {
+  function openModal(name, price) {
     currentProduct = name;
     currentPrice = price;
     currentQuantity = 1;
-    currentImage = imageUrl;
 
     document.getElementById('modal-name').innerText = name;
     document.getElementById('modal-price').innerText = price.toFixed(2);
@@ -433,5 +431,6 @@
 
 </body>
 </html>
+
 
 
