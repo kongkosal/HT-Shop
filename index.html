@@ -99,37 +99,90 @@
       margin: 10px 0;
     }
 
+    /* Modal Styles */
+    .modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.6);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 999;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+
+    .modal-content {
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      width: 100%;
+      max-width: 320px;
+      text-align: center;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .quantity {
+      margin: 15px 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .quantity button {
+      width: 40px;
+      height: 40px;
+      font-size: 20px;
+      padding: 0;
+    }
+
+    .close-btn {
+      margin-top: 10px;
+      background-color: #999;
+    }
+
+    .checkout-btn {
+      background-color: green;
+      margin-top: 10px;
+    }
+
+    @keyframes fadeIn {
+      from {
+        transform: translateY(20px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
     /* Responsive styles */
     @media (max-width: 600px) {
-      header {
-        padding-bottom: 10px;
-      }
-      nav {
-        margin-bottom: 15px;
-        justify-content: center;
-        padding: 10px 5px;
-      }
-      nav a {
-        margin: 5px 8px;
-        font-size: 14px;
-      }
       .container {
         flex-wrap: wrap;
         justify-content: flex-start;
         padding: 10px;
         gap: 10px;
       }
+
       .product {
         width: calc(50% - 10px);
         margin: 0;
         margin-bottom: 15px;
       }
+
       h2 {
         font-size: 16px;
       }
+
       button {
         padding: 14px;
-        font-size: 18px;
+        font-size: 16px;
       }
     }
   </style>
@@ -149,72 +202,184 @@
     <img src="custom-tshirt.png" alt="Custom T-Shirt" />
     <h2>Custom T-Shirt</h2>
     <p class="price"><span class="old-price">$29</span> <span class="new-price">$19</span></p>
+    <button onclick="openModal('Custom T-Shirt', 19)">Order</button>
+  </div>
+  <div class="product">
+    <img src="image01.jpg" alt="T-Shirt" />
+    <h2>T-Shirt</h2>
+    <p class="price"><span class="old-price">$12</span> <span class="new-price">$7</span></p>
     <button onclick="openModal('T-Shirt', 7)">Order</button>
   </div>
   <div class="product">
-    <img src="image01.jpg" alt="Laptop" />
-    <h2>T-Shirt</h2>
-    <p class="price"><span class="old-price">$12</span> <span class="new-price">$7</span></p>
-    <button onclick="openModal('T-Shirt', 8)">Order</button>
+    <img src="custom-tshirt.png" alt="Custom T-Shirt" />
+    <h2>Custom T-Shirt</h2>
+    <p class="price"><span class="old-price">$29</span> <span class="new-price">$19</span></p>
+    <button onclick="openModal('Custom T-Shirt', 19)">Order</button>
   </div>
   <div class="product">
-    <img src="image02.png" alt="Chair" />
-    <h2>T-Shirt</h2>
-    <p class="price"><span class="old-price">$15</span> <span class="new-price">$12</span></p>
-    <button>MORE INFO</button>
+    <img src="custom-tshirt.png" alt="Custom T-Shirt" />
+    <h2>Custom T-Shirt</h2>
+    <p class="price"><span class="old-price">$29</span> <span class="new-price">$19</span></p>
+    <button onclick="openModal('Custom T-Shirt', 19)">Order</button>
   </div>
   <div class="product">
-    <img src="https://via.placeholder.com/150x200?text=Stroller" alt="Stroller" />
-    <h2>Household</h2>
-    <p class="price"><span class="old-price">$89</span> <span class="new-price">$59</span></p>
-    <button>MORE INFO</button>
+    <img src="custom-tshirt.png" alt="Custom T-Shirt" />
+    <h2>Custom T-Shirt</h2>
+    <p class="price"><span class="old-price">$29</span> <span class="new-price">$19</span></p>
+    <button onclick="openModal('Custom T-Shirt', 19)">Order</button>
   </div>
   <div class="product">
-    <img src="https://via.placeholder.com/150x200?text=Clothing" alt="Clothing" />
-    <h2>Clothing</h2>
-    <p class="price"><span class="old-price">$89</span> <span class="new-price">$59</span></p>
-    <button>MORE INFO</button>
+    <img src="custom-tshirt.png" alt="Custom T-Shirt" />
+    <h2>Custom T-Shirt</h2>
+    <p class="price"><span class="old-price">$29</span> <span class="new-price">$19</span></p>
+    <button onclick="openModal('Custom T-Shirt', 19)">Order</button>
   </div>
   <div class="product">
-    <img src="https://via.placeholder.com/150x200?text=Shoes" alt="Shoes" />
-    <h2>Shoes & Beauty</h2>
-    <p class="price"><span class="old-price">$169</span> <span class="new-price">$119</span></p>
-    <button>MORE INFO</button>
+    <img src="custom-tshirt.png" alt="Custom T-Shirt" />
+    <h2>Custom T-Shirt</h2>
+    <p class="price"><span class="old-price">$29</span> <span class="new-price">$19</span></p>
+    <button onclick="openModal('Custom T-Shirt', 19)">Order</button>
   </div>
   <div class="product">
-    <img src="https://via.placeholder.com/150x200?text=Plant" alt="Plant" />
-    <h2>Homeware</h2>
-    <p class="price"><span class="old-price">$49</span> <span class="new-price">$39</span></p>
-    <button>MORE INFO</button>
+    <img src="custom-tshirt.png" alt="Custom T-Shirt" />
+    <h2>Custom T-Shirt</h2>
+    <p class="price"><span class="old-price">$29</span> <span class="new-price">$19</span></p>
+    <button onclick="openModal('Custom T-Shirt', 19)">Order</button>
   </div>
   <div class="product">
-    <img src="https://via.placeholder.com/150x200?text=Grocery" alt="Grocery" />
-    <h2>Food & Cooking</h2>
-    <p class="price"><span class="old-price">$49</span> <span class="new-price">$39</span></p>
-    <button>MORE INFO</button>
+    <img src="custom-tshirt.png" alt="Custom T-Shirt" />
+    <h2>Custom T-Shirt</h2>
+    <p class="price"><span class="old-price">$29</span> <span class="new-price">$19</span></p>
+    <button onclick="openModal('Custom T-Shirt', 19)">Order</button>
+  </div>
+  <div class="product">
+    <img src="custom-tshirt.png" alt="Custom T-Shirt" />
+    <h2>Custom T-Shirt</h2>
+    <p class="price"><span class="old-price">$29</span> <span class="new-price">$19</span></p>
+    <button onclick="openModal('Custom T-Shirt', 19)">Order</button>
+  </div>
+  <div class="product">
+    <img src="custom-tshirt.png" alt="Custom T-Shirt" />
+    <h2>Custom T-Shirt</h2>
+    <p class="price"><span class="old-price">$29</span> <span class="new-price">$19</span></p>
+    <button onclick="openModal('Custom T-Shirt', 19)">Order</button>
+  </div>
+  <div class="product">
+    <img src="custom-tshirt.png" alt="Custom T-Shirt" />
+    <h2>Custom T-Shirt</h2>
+    <p class="price"><span class="old-price">$29</span> <span class="new-price">$19</span></p>
+    <button onclick="openModal('Custom T-Shirt', 19)">Order</button>
+  </div>
+  <div class="product">
+    <img src="custom-tshirt.png" alt="Custom T-Shirt" />
+    <h2>Custom T-Shirt</h2>
+    <p class="price"><span class="old-price">$29</span> <span class="new-price">$19</span></p>
+    <button onclick="openModal('Custom T-Shirt', 19)">Order</button>
+  </div>
+  <div class="product">
+    <img src="custom-tshirt.png" alt="Custom T-Shirt" />
+    <h2>Custom T-Shirt</h2>
+    <p class="price"><span class="old-price">$29</span> <span class="new-price">$19</span></p>
+    <button onclick="openModal('Custom T-Shirt', 19)">Order</button>
+  </div>
+  <div class="product">
+    <img src="custom-tshirt.png" alt="Custom T-Shirt" />
+    <h2>Custom T-Shirt</h2>
+    <p class="price"><span class="old-price">$29</span> <span class="new-price">$19</span></p>
+    <button onclick="openModal('Custom T-Shirt', 19)">Order</button>
+  </div>
+  <div class="product">
+    <img src="custom-tshirt.png" alt="Custom T-Shirt" />
+    <h2>Custom T-Shirt</h2>
+    <p class="price"><span class="old-price">$29</span> <span class="new-price">$19</span></p>
+    <button onclick="openModal('Custom T-Shirt', 19)">Order</button>
+  </div>
+  <div class="product">
+    <img src="custom-tshirt.png" alt="Custom T-Shirt" />
+    <h2>Custom T-Shirt</h2>
+    <p class="price"><span class="old-price">$29</span> <span class="new-price">$19</span></p>
+    <button onclick="openModal('Custom T-Shirt', 19)">Order</button>
+  </div>
+  <div class="product">
+    <img src="custom-tshirt.png" alt="Custom T-Shirt" />
+    <h2>Custom T-Shirt</h2>
+    <p class="price"><span class="old-price">$29</span> <span class="new-price">$19</span></p>
+    <button onclick="openModal('Custom T-Shirt', 19)">Order</button>
+  </div>
+  <div class="product">
+    <img src="custom-tshirt.png" alt="Custom T-Shirt" />
+    <h2>Custom T-Shirt</h2>
+    <p class="price"><span class="old-price">$29</span> <span class="new-price">$19</span></p>
+    <button onclick="openModal('Custom T-Shirt', 19)">Order</button>
+  </div>
+  <div class="product">
+    <img src="custom-tshirt.png" alt="Custom T-Shirt" />
+    <h2>Custom T-Shirt</h2>
+    <p class="price"><span class="old-price">$29</span> <span class="new-price">$19</span></p>
+    <button onclick="openModal('Custom T-Shirt', 19)">Order</button>
+  </div>
+  <div class="product">
+    <img src="custom-tshirt.png" alt="Custom T-Shirt" />
+    <h2>Custom T-Shirt</h2>
+    <p class="price"><span class="old-price">$29</span> <span class="new-price">$19</span></p>
+    <button onclick="openModal('Custom T-Shirt', 19)">Order</button>
+  </div>
+  <div class="product">
+    <img src="custom-tshirt.png" alt="Custom T-Shirt" />
+    <h2>Custom T-Shirt</h2>
+    <p class="price"><span class="old-price">$29</span> <span class="new-price">$19</span></p>
+    <button onclick="openModal('Custom T-Shirt', 19)">Order</button>
+  </div>
+  <div class="product">
+    <img src="custom-tshirt.png" alt="Custom T-Shirt" />
+    <h2>Custom T-Shirt</h2>
+    <p class="price"><span class="old-price">$29</span> <span class="new-price">$19</span></p>
+    <button onclick="openModal('Custom T-Shirt', 19)">Order</button>
+  </div>
+  <div class="product">
+    <img src="custom-tshirt.png" alt="Custom T-Shirt" />
+    <h2>Custom T-Shirt</h2>
+    <p class="price"><span class="old-price">$29</span> <span class="new-price">$19</span></p>
+    <button onclick="openModal('Custom T-Shirt', 19)">Order</button>
+  </div>
+  <div class="product">
+    <img src="custom-tshirt.png" alt="Custom T-Shirt" />
+    <h2>Custom T-Shirt</h2>
+    <p class="price"><span class="old-price">$29</span> <span class="new-price">$19</span></p>
+    <button onclick="openModal('Custom T-Shirt', 19)">Order</button>
   </div>
 </div>
-  <div class="modal" id="modal">
+
+<!-- Modal -->
+<div class="modal" id="modal">
   <div class="modal-content">
     <h2 id="modal-name">Product Name</h2>
-    <p>Price: $<span id="modal-price">0</span></p>
+    <p>Price: $<span id="modal-price">0.00</span></p>
     <div class="quantity">
       <button onclick="changeQuantity(-1)">-</button>
       <span id="modal-quantity">1</span>
       <button onclick="changeQuantity(1)">+</button>
     </div>
+    <p>Total: $<span id="modal-total">0.00</span></p>
+    <button class="checkout-btn" onclick="checkout()">Checkout</button>
     <button class="close-btn" onclick="closeModal()">Close</button>
   </div>
 </div>
 
 <script>
   let currentQuantity = 1;
+  let currentProduct = '';
+  let currentPrice = 0;
 
   function openModal(name, price) {
+    currentProduct = name;
+    currentPrice = price;
+    currentQuantity = 1;
+
     document.getElementById('modal-name').innerText = name;
     document.getElementById('modal-price').innerText = price.toFixed(2);
-    document.getElementById('modal-quantity').innerText = 1;
-    currentQuantity = 1;
+    document.getElementById('modal-quantity').innerText = currentQuantity;
+    document.getElementById('modal-total').innerText = (price * currentQuantity).toFixed(2);
     document.getElementById('modal').style.display = 'flex';
   }
 
@@ -226,6 +391,9 @@
     currentQuantity += amount;
     if (currentQuantity < 1) currentQuantity = 1;
     document.getElementById('modal-quantity').innerText = currentQuantity;
+    document.getElementById('modal-total').innerText = (currentPrice * currentQuantity).toFixed(2);
+  }
+
   function checkout() {
     const total = (currentPrice * currentQuantity).toFixed(2);
     alert(`✅ Checkout Summary:\n\nProduct: ${currentProduct}\nPrice: $${currentPrice}\nQuantity: ${currentQuantity}\nTotal: $${total}`);
@@ -233,9 +401,5 @@
   }
 </script>
 
-
 </body>
 </html>
-
-
-
