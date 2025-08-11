@@ -10,14 +10,12 @@
       margin: 0;
       background: #f9f9f9;
     }
-
     header {
       background-color: #000000;
       color: white;
       padding: 20px;
       text-align: center;
     }
-
     nav {
       background: #e0e0e0;
       display: flex;
@@ -25,21 +23,18 @@
       flex-wrap: wrap;
       padding: 10px;
     }
-
     nav a {
       margin: 0 10px;
       text-decoration: none;
       color: #000;
       font-weight: bold;
     }
-
     .container {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
       padding: 20px;
     }
-
     .product {
       background: white;
       border: 1px solid #ccc;
@@ -52,32 +47,26 @@
       transition: transform 0.3s ease;
       box-shadow: 0 2px 6px rgba(0,0,0,0.1);
     }
-
     .product:hover {
       transform: scale(1.05);
     }
-
     .product img {
       width: 100%;
       height: auto;
       border-radius: 5px;
     }
-
     .price {
       margin: 5px 0;
     }
-
     .old-price {
       text-decoration: line-through;
       color: #888;
       margin-right: 8px;
     }
-
     .new-price {
       color: green;
       font-weight: bold;
     }
-
     button {
       background-color: orange;
       color: white;
@@ -89,16 +78,13 @@
       font-weight: bold;
       transition: background-color 0.3s ease;
     }
-
     button:hover {
       background-color: darkorange;
     }
-
     h2 {
       font-size: 18px;
       margin: 10px 0;
     }
-
     /* Modal Styles */
     .modal {
       position: fixed;
@@ -114,7 +100,6 @@
       padding: 20px;
       box-sizing: border-box;
     }
-
     .modal-content {
       background: white;
       padding: 20px;
@@ -124,7 +109,6 @@
       text-align: center;
       animation: fadeIn 0.3s ease;
     }
-
     .quantity {
       margin: 15px 0;
       display: flex;
@@ -132,24 +116,20 @@
       align-items: center;
       gap: 20px;
     }
-
     .quantity button {
       width: 40px;
       height: 40px;
       font-size: 20px;
       padding: 0;
     }
-
     .close-btn {
       margin-top: 10px;
       background-color: #999;
     }
-
     .checkout-btn {
       background-color: green;
       margin-top: 10px;
     }
-
     @keyframes fadeIn {
       from {
         transform: translateY(20px);
@@ -160,7 +140,6 @@
         opacity: 1;
       }
     }
-
     /* Responsive styles */
     @media (max-width: 600px) {
       .container {
@@ -169,17 +148,14 @@
         padding: 10px;
         gap: 10px;
       }
-
       .product {
         width: calc(50% - 10px);
         margin: 0;
         margin-bottom: 15px;
       }
-
       h2 {
         font-size: 16px;
       }
-
       button {
         padding: 14px;
         font-size: 16px;
@@ -198,150 +174,6 @@
 </nav>
 
 <div class="container">
-  <div class="product">
-    <img src="custom-tshirt.png" alt="Custom T-Shirt" />
-    <h2>Custom T-Shirt</h2>
-    <p class="price"><span class="old-price">$29</span> <span class="new-price">$19</span></p>
-    <button onclick="openModal('Custom T-Shirt', 19)">Order</button>
-  </div>
-  <div class="product">
-    <img src="image01.jpg" alt="T-Shirt" />
-    <h2>T-Shirt</h2>
-    <p class="price"><span class="old-price">$12</span> <span class="new-price">$7</span></p>
-    <button onclick="openModal('T-Shirt', 7)">Order</button>
-  </div>
-  <div class="product">
-    <img src="custom-tshirt.png" alt="Custom T-Shirt" />
-    <h2>Custom T-Shirt</h2>
-    <p class="price"><span class="old-price">$29</span> <span class="new-price">$19</span></p>
-    <button onclick="openModal('Custom T-Shirt', 19)">Order</button>
-  </div>
-  <div class="product">
-    <img src="custom-tshirt.png" alt="Custom T-Shirt" />
-    <h2>Custom T-Shirt</h2>
-    <p class="price"><span class="old-price">$29</span> <span class="new-price">$19</span></p>
-    <button onclick="openModal('Custom T-Shirt', 19)">Order</button>
-  </div>
-  <div class="product">
-    <img src="custom-tshirt.png" alt="Custom T-Shirt" />
-    <h2>Custom T-Shirt</h2>
-    <p class="price"><span class="old-price">$29</span> <span class="new-price">$19</span></p>
-    <button onclick="openModal('Custom T-Shirt', 19)">Order</button>
-  </div>
-  <div class="product">
-    <img src="custom-tshirt.png" alt="Custom T-Shirt" />
-    <h2>Custom T-Shirt</h2>
-    <p class="price"><span class="old-price">$29</span> <span class="new-price">$19</span></p>
-    <button onclick="openModal('Custom T-Shirt', 19)">Order</button>
-  </div>
-  <div class="product">
-    <img src="custom-tshirt.png" alt="Custom T-Shirt" />
-    <h2>Custom T-Shirt</h2>
-    <p class="price"><span class="old-price">$29</span> <span class="new-price">$19</span></p>
-    <button onclick="openModal('Custom T-Shirt', 19)">Order</button>
-  </div>
-  <div class="product">
-    <img src="custom-tshirt.png" alt="Custom T-Shirt" />
-    <h2>Custom T-Shirt</h2>
-    <p class="price"><span class="old-price">$29</span> <span class="new-price">$19</span></p>
-    <button onclick="openModal('Custom T-Shirt', 19)">Order</button>
-  </div>
-  <div class="product">
-    <img src="custom-tshirt.png" alt="Custom T-Shirt" />
-    <h2>Custom T-Shirt</h2>
-    <p class="price"><span class="old-price">$29</span> <span class="new-price">$19</span></p>
-    <button onclick="openModal('Custom T-Shirt', 19)">Order</button>
-  </div>
-  <div class="product">
-    <img src="custom-tshirt.png" alt="Custom T-Shirt" />
-    <h2>Custom T-Shirt</h2>
-    <p class="price"><span class="old-price">$29</span> <span class="new-price">$19</span></p>
-    <button onclick="openModal('Custom T-Shirt', 19)">Order</button>
-  </div>
-  <div class="product">
-    <img src="custom-tshirt.png" alt="Custom T-Shirt" />
-    <h2>Custom T-Shirt</h2>
-    <p class="price"><span class="old-price">$29</span> <span class="new-price">$19</span></p>
-    <button onclick="openModal('Custom T-Shirt', 19)">Order</button>
-  </div>
-  <div class="product">
-    <img src="custom-tshirt.png" alt="Custom T-Shirt" />
-    <h2>Custom T-Shirt</h2>
-    <p class="price"><span class="old-price">$29</span> <span class="new-price">$19</span></p>
-    <button onclick="openModal('Custom T-Shirt', 19)">Order</button>
-  </div>
-  <div class="product">
-    <img src="custom-tshirt.png" alt="Custom T-Shirt" />
-    <h2>Custom T-Shirt</h2>
-    <p class="price"><span class="old-price">$29</span> <span class="new-price">$19</span></p>
-    <button onclick="openModal('Custom T-Shirt', 19)">Order</button>
-  </div>
-  <div class="product">
-    <img src="custom-tshirt.png" alt="Custom T-Shirt" />
-    <h2>Custom T-Shirt</h2>
-    <p class="price"><span class="old-price">$29</span> <span class="new-price">$19</span></p>
-    <button onclick="openModal('Custom T-Shirt', 19)">Order</button>
-  </div>
-  <div class="product">
-    <img src="custom-tshirt.png" alt="Custom T-Shirt" />
-    <h2>Custom T-Shirt</h2>
-    <p class="price"><span class="old-price">$29</span> <span class="new-price">$19</span></p>
-    <button onclick="openModal('Custom T-Shirt', 19)">Order</button>
-  </div>
-  <div class="product">
-    <img src="custom-tshirt.png" alt="Custom T-Shirt" />
-    <h2>Custom T-Shirt</h2>
-    <p class="price"><span class="old-price">$29</span> <span class="new-price">$19</span></p>
-    <button onclick="openModal('Custom T-Shirt', 19)">Order</button>
-  </div>
-  <div class="product">
-    <img src="custom-tshirt.png" alt="Custom T-Shirt" />
-    <h2>Custom T-Shirt</h2>
-    <p class="price"><span class="old-price">$29</span> <span class="new-price">$19</span></p>
-    <button onclick="openModal('Custom T-Shirt', 19)">Order</button>
-  </div>
-  <div class="product">
-    <img src="custom-tshirt.png" alt="Custom T-Shirt" />
-    <h2>Custom T-Shirt</h2>
-    <p class="price"><span class="old-price">$29</span> <span class="new-price">$19</span></p>
-    <button onclick="openModal('Custom T-Shirt', 19)">Order</button>
-  </div>
-  <div class="product">
-    <img src="custom-tshirt.png" alt="Custom T-Shirt" />
-    <h2>Custom T-Shirt</h2>
-    <p class="price"><span class="old-price">$29</span> <span class="new-price">$19</span></p>
-    <button onclick="openModal('Custom T-Shirt', 19)">Order</button>
-  </div>
-  <div class="product">
-    <img src="custom-tshirt.png" alt="Custom T-Shirt" />
-    <h2>Custom T-Shirt</h2>
-    <p class="price"><span class="old-price">$29</span> <span class="new-price">$19</span></p>
-    <button onclick="openModal('Custom T-Shirt', 19)">Order</button>
-  </div>
-  <div class="product">
-    <img src="custom-tshirt.png" alt="Custom T-Shirt" />
-    <h2>Custom T-Shirt</h2>
-    <p class="price"><span class="old-price">$29</span> <span class="new-price">$19</span></p>
-    <button onclick="openModal('Custom T-Shirt', 19)">Order</button>
-  </div>
-  <div class="product">
-    <img src="custom-tshirt.png" alt="Custom T-Shirt" />
-    <h2>Custom T-Shirt</h2>
-    <p class="price"><span class="old-price">$29</span> <span class="new-price">$19</span></p>
-    <button onclick="openModal('Custom T-Shirt', 19)">Order</button>
-  </div>
-  <div class="product">
-    <img src="custom-tshirt.png" alt="Custom T-Shirt" />
-    <h2>Custom T-Shirt</h2>
-    <p class="price"><span class="old-price">$29</span> <span class="new-price">$19</span></p>
-    <button onclick="openModal('Custom T-Shirt', 19)">Order</button>
-  </div>
-  <div class="product">
-    <img src="custom-tshirt.png" alt="Custom T-Shirt" />
-    <h2>Custom T-Shirt</h2>
-    <p class="price"><span class="old-price">$29</span> <span class="new-price">$19</span></p>
-    <button onclick="openModal('Custom T-Shirt', 19)">Order</button>
-  </div>
   <div class="product">
     <img src="custom-tshirt.png" alt="Custom T-Shirt" />
     <h2>Custom T-Shirt</h2>
@@ -375,7 +207,6 @@
     currentProduct = name;
     currentPrice = price;
     currentQuantity = 1;
-
     document.getElementById('modal-name').innerText = name;
     document.getElementById('modal-price').innerText = price.toFixed(2);
     document.getElementById('modal-quantity').innerText = currentQuantity;
@@ -396,43 +227,29 @@
 
   function checkout() {
     const total = (currentPrice * currentQuantity).toFixed(2);
-    const userMessage = document.getElementById('modal-message').value.trim();
     const message = `🛒 *New Order!*\n\n*Product:* ${currentProduct}\n*Price:* $${currentPrice}\n*Quantity:* ${currentQuantity}\n*Total:* $${total}`;
-    alert(`✅ Checkout Summary:\n\nProduct: ${currentProduct}\nPrice: $${currentPrice}\nQuantity: ${currentQuantity}\nTotal: $${total}`);
+
     const botToken = "7597962374:AAFHkklfpEKWGXzErmnywORTpMRco32uncs";
-    const chatId = "1268254469"; // <- Replace this with your actual chat ID
-    fetch(https://api.telegram.org/bot${botToken}/sendMessage, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        chat_id: chatId,
-        text: message,
-        parse_mode: "Markdown"
+    const chatId = "1268254469";
+
+    fetch(`https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(message)}&parse_mode=Markdown`)
+      .then(res => res.json())
+      .then(data => {
+        if (data.ok) {
+          alert("✅ Order sent successfully to Telegram!");
+        } else {
+          alert("❌ Failed to send order.");
+          console.error(data);
+        }
       })
-    })
-    .then(response => response.json())
-    .then(data => {
-      if (data.ok) {
-        alert("✅ Order sent successfully to Telegram!");
-      } else {
-        alert("❌ Failed to send order.");
-        console.error(data);
-      }
-    })
-    .catch(error => {
-      alert("❌ Error sending message.");
-      console.error(error);
-    });
+      .catch(error => {
+        alert("❌ Error sending message.");
+        console.error(error);
+      });
+
     closeModal();
   }
 </script>
 
 </body>
 </html>
-
-
-
-
-
