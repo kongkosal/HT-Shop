@@ -39,13 +39,26 @@
 </div>
 
 <script>
+let billCounter = 1000; // Start bill numbers from 1000
+
 function orderNow() {
+  let customerName = prompt("Name?");
+  if (!customerName) {
+    alert("❌ Name is required!");
+    return;
+  }
+
+  billCounter++; // Increase bill number each time
+  let billNumber = "BILL-" + billCounter;
+
   let productName = document.getElementById("productName").innerText;
   let productPrice = parseFloat(document.getElementById("productPrice").innerText);
   let quantity = parseInt(document.getElementById("quantity").value);
   let total = (productPrice * quantity).toFixed(2);
 
-  let message = `🛒 *New Order Received!*\n\n` +
+  let message = `🧾 *Order Bill*\n` +
+                `*Bill No:* ${billNumber}\n` +
+                `*Name:* ${customerName}\n\n` +
                 `*Product:* ${productName}\n` +
                 `*Price:* $${productPrice}\n` +
                 `*Quantity:* ${quantity}\n` +
@@ -54,4 +67,22 @@ function orderNow() {
   let botToken = "7597962374:AAFHkklfpEKWGXzErmnywORTpMRco32uncs";
   let chatId = "1268254469";
 
-  fetch(`https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${encodeURIComp_
+  fetch(`https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(message)}&parse_mode=Markdown`)
+    .then(res => res.json())
+    .then(data => {
+      if (data.ok) {
+        alert("✅ Order sent to Telegram!");
+      } else {
+        alert("❌ Failed to send order.");
+        console.error(data);
+      }
+    })
+    .catch(error => {
+      alert("❌ Error sending order.");
+      console.error(error);
+    });
+}
+</script>
+
+</body>
+</html>
