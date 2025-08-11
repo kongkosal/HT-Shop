@@ -85,7 +85,6 @@
       font-size: 18px;
       margin: 10px 0;
     }
-    /* Modal Styles */
     .modal {
       position: fixed;
       top: 0;
@@ -140,7 +139,6 @@
         opacity: 1;
       }
     }
-    /* Responsive styles */
     @media (max-width: 600px) {
       .container {
         flex-wrap: wrap;
@@ -169,10 +167,6 @@
   <h1>HT SHOP</h1>
 </header>
 
-<nav>
-  <a href="#"></a>
-</nav>
-
 <div class="container">
   <div class="product">
     <img src="custom-tshirt.png" alt="Custom T-Shirt" />
@@ -180,10 +174,8 @@
     <p class="price"><span class="old-price">$29</span> <span class="new-price">$19</span></p>
     <button onclick="openModal('Custom T-Shirt', 19)">Order</button>
   </div>
-  
 </div>
 
-<!-- Modal -->
 <div class="modal" id="modal">
   <div class="modal-content">
     <h2 id="modal-name">Product Name</h2>
@@ -203,6 +195,7 @@
   let currentQuantity = 1;
   let currentProduct = '';
   let currentPrice = 0;
+  let billCounter = 1000; // starting bill number
 
   function openModal(name, price) {
     currentProduct = name;
@@ -227,8 +220,20 @@
   }
 
   function checkout() {
+    const customerName = prompt("Enter your name:");
+    if (!customerName) {
+      alert("❌ Name is required!");
+      return;
+    }
+    billCounter++;
     const total = (currentPrice * currentQuantity).toFixed(2);
-    const message = `🛒 *New Order!*\n\n*Product:* ${currentProduct}\n*Price:* $${currentPrice}\n*Quantity:* ${currentQuantity}\n*Total:* $${total}`;
+    const message =
+`🧾 *Bill No:* ${billCounter}
+👤 *Name:* ${customerName}
+📦 *Product:* ${currentProduct}
+💲 *Price:* $${currentPrice}
+🔢 *Quantity:* ${currentQuantity}
+💰 *Total:* $${total}`;
 
     const botToken = "7597962374:AAFHkklfpEKWGXzErmnywORTpMRco32uncs";
     const chatId = "1268254469";
@@ -237,7 +242,7 @@
       .then(res => res.json())
       .then(data => {
         if (data.ok) {
-          alert("✅ Order sent successfully to Telegram!");
+          alert(`✅ Order sent! Bill No: ${billCounter}`);
         } else {
           alert("❌ Failed to send order.");
           console.error(data);
@@ -254,4 +259,3 @@
 
 </body>
 </html>
-
