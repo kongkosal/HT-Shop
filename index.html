@@ -1,255 +1,57 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>HT SHOP</title>
+  <title>Order Page</title>
   <style>
     body {
       font-family: Arial, sans-serif;
-      margin: 0;
-      background: #f9f9f9;
-    }
-    header {
-      background-color: #000000;
-      color: white;
-      padding: 20px;
-      text-align: center;
-    }
-    nav {
-      background: #e0e0e0;
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      padding: 10px;
-    }
-    nav a {
-      margin: 0 10px;
-      text-decoration: none;
-      color: #000;
-      font-weight: bold;
-    }
-    .container {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
       padding: 20px;
     }
     .product {
-      background: white;
       border: 1px solid #ccc;
-      margin: 10px;
-      padding: 10px;
-      width: 220px;
-      text-align: center;
-      border-radius: 8px;
-      box-sizing: border-box;
-      transition: transform 0.3s ease;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      padding: 15px;
+      margin-bottom: 10px;
     }
-    .product:hover {
-      transform: scale(1.05);
-    }
-    .product img {
-      width: 100%;
-      height: auto;
-      border-radius: 5px;
-    }
-    .price {
-      margin: 5px 0;
-    }
-    .old-price {
-      text-decoration: line-through;
-      color: #888;
-      margin-right: 8px;
-    }
-    .new-price {
-      color: green;
-      font-weight: bold;
-    }
-    button {
-      background-color: orange;
+    .btn {
+      background-color: #28a745;
       color: white;
+      padding: 10px 20px;
       border: none;
-      padding: 10px;
-      border-radius: 5px;
       cursor: pointer;
-      width: 100%;
-      font-weight: bold;
-      transition: background-color 0.3s ease;
+      font-size: 16px;
     }
-    button:hover {
-      background-color: darkorange;
-    }
-    h2 {
-      font-size: 18px;
-      margin: 10px 0;
-    }
-    /* Modal Styles */
-    .modal {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.6);
-      display: none;
-      justify-content: center;
-      align-items: center;
-      z-index: 999;
-      padding: 20px;
-      box-sizing: border-box;
-    }
-    .modal-content {
-      background: white;
-      padding: 20px;
-      border-radius: 8px;
-      width: 100%;
-      max-width: 320px;
-      text-align: center;
-      animation: fadeIn 0.3s ease;
-    }
-    .quantity {
-      margin: 15px 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 20px;
-    }
-    .quantity button {
-      width: 40px;
-      height: 40px;
-      font-size: 20px;
-      padding: 0;
-    }
-    .close-btn {
-      margin-top: 10px;
-      background-color: #999;
-    }
-    .checkout-btn {
-      background-color: green;
-      margin-top: 10px;
-    }
-    @keyframes fadeIn {
-      from {
-        transform: translateY(20px);
-        opacity: 0;
-      }
-      to {
-        transform: translateY(0);
-        opacity: 1;
-      }
-    }
-    /* Responsive styles */
-    @media (max-width: 600px) {
-      .container {
-        flex-wrap: wrap;
-        justify-content: flex-start;
-        padding: 10px;
-        gap: 10px;
-      }
-      .product {
-        width: calc(50% - 10px);
-        margin: 0;
-        margin-bottom: 15px;
-      }
-      h2 {
-        font-size: 16px;
-      }
-      button {
-        padding: 14px;
-        font-size: 16px;
-      }
+    .btn:hover {
+      background-color: #218838;
     }
   </style>
 </head>
 <body>
 
-<header>
-  <h1>HT SHOP</h1>
-</header>
+<h2>My Shop</h2>
 
-<nav>
-  <a href="#"></a>
-</nav>
-
-<div class="container">
-  <div class="product">
-    <img src="custom-tshirt.png" alt="Custom T-Shirt" />
-    <h2>Custom T-Shirt</h2>
-    <p class="price"><span class="old-price">$29</span> <span class="new-price">$19</span></p>
-    <button onclick="openModal('Custom T-Shirt', 19)">Order</button>
-  </div>
-</div>
-
-<!-- Modal -->
-<div class="modal" id="modal">
-  <div class="modal-content">
-    <h2 id="modal-name">Product Name</h2>
-    <p>Price: $<span id="modal-price">0.00</span></p>
-    <div class="quantity">
-      <button onclick="changeQuantity(-1)">-</button>
-      <span id="modal-quantity">1</span>
-      <button onclick="changeQuantity(1)">+</button>
-    </div>
-    <p>Total: $<span id="modal-total">0.00</span></p>
-    <button class="checkout-btn" onclick="checkout()">Checkout</button>
-    <button class="close-btn" onclick="closeModal()">Close</button>
-  </div>
+<div class="product">
+  <h3 id="productName">Product ABC</h3>
+  <p>Price: $<span id="productPrice">10</span></p>
+  <label>Quantity:</label>
+  <input type="number" id="quantity" value="1" min="1">
+  <br><br>
+  <button class="btn" onclick="orderNow()">Order</button>
 </div>
 
 <script>
-  let currentQuantity = 1;
-  let currentProduct = '';
-  let currentPrice = 0;
+function orderNow() {
+  let productName = document.getElementById("productName").innerText;
+  let productPrice = parseFloat(document.getElementById("productPrice").innerText);
+  let quantity = parseInt(document.getElementById("quantity").value);
+  let total = (productPrice * quantity).toFixed(2);
 
-  function openModal(name, price) {
-    currentProduct = name;
-    currentPrice = price;
-    currentQuantity = 1;
-    document.getElementById('modal-name').innerText = name;
-    document.getElementById('modal-price').innerText = price.toFixed(2);
-    document.getElementById('modal-quantity').innerText = currentQuantity;
-    document.getElementById('modal-total').innerText = (price * currentQuantity).toFixed(2);
-    document.getElementById('modal').style.display = 'flex';
-  }
+  let message = `🛒 *New Order Received!*\n\n` +
+                `*Product:* ${productName}\n` +
+                `*Price:* $${productPrice}\n` +
+                `*Quantity:* ${quantity}\n` +
+                `*Total:* $${total}`;
 
-  function closeModal() {
-    document.getElementById('modal').style.display = 'none';
-  }
+  let botToken = "7597962374:AAFHkklfpEKWGXzErmnywORTpMRco32uncs";
+  let chatId = "1268254469";
 
-  function changeQuantity(amount) {
-    currentQuantity += amount;
-    if (currentQuantity < 1) currentQuantity = 1;
-    document.getElementById('modal-quantity').innerText = currentQuantity;
-    document.getElementById('modal-total').innerText = (currentPrice * currentQuantity).toFixed(2);
-  }
-
-  function checkout() {
-    const total = (currentPrice * currentQuantity).toFixed(2);
-    const message = `🛒 *New Order!*\n\n*Product:* ${currentProduct}\n*Price:* $${currentPrice}\n*Quantity:* ${currentQuantity}\n*Total:* $${total}`;
-
-    const botToken = "7597962374:AAFHkklfpEKWGXzErmnywORTpMRco32uncs";
-    const chatId = "1268254469";
-
-    fetch(`https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(message)}&parse_mode=Markdown`)
-      .then(res => res.json())
-      .then(data => {
-        if (data.ok) {
-          alert("✅ Order sent successfully to Telegram!");
-        } else {
-          alert("❌ Failed to send order.");
-          console.error(data);
-        }
-      })
-      .catch(error => {
-        alert("❌ Error sending message.");
-        console.error(error);
-      });
-
-    closeModal();
-  }
-</script>
-
-</body>
-</html>
+  fetch(`https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${encodeURIComp_
