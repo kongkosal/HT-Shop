@@ -39,26 +39,13 @@
 </div>
 
 <script>
-let billCounter = 1000; // Start bill numbers from 1000
-
 function orderNow() {
-  let customerName = prompt("Name?");
-  if (!customerName) {
-    alert("❌ Name is required!");
-    return;
-  }
-
-  billCounter++; // Increase bill number each time
-  let billNumber = "BILL-" + billCounter;
-
   let productName = document.getElementById("productName").innerText;
   let productPrice = parseFloat(document.getElementById("productPrice").innerText);
   let quantity = parseInt(document.getElementById("quantity").value);
   let total = (productPrice * quantity).toFixed(2);
 
-  let message = `🧾 *Order Bill*\n` +
-                `*Bill No:* ${billNumber}\n` +
-                `*Name:* ${customerName}\n\n` +
+  let message = `🛒 *New Order Received!*\n\n` +
                 `*Product:* ${productName}\n` +
                 `*Price:* $${productPrice}\n` +
                 `*Quantity:* ${quantity}\n` +
