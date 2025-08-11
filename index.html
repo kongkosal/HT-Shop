@@ -129,6 +129,71 @@
       background-color: green;
       margin-top: 10px;
     }
+    #login-form, #register-form {
+      max-width: 320px;
+      margin: 50px auto;
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      display: none;
+      flex-direction: column;
+      gap: 10px;
+    }
+    #login-form.active, #register-form.active {
+      display: flex;
+    }
+    input[type="text"], input[type="password"] {
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    #bill-history {
+      max-width: 800px;
+      margin: 30px auto 50px auto;
+      background: white;
+      border-radius: 8px;
+      padding: 20px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      display: none;
+    }
+    #bill-history h2 {
+      text-align: center;
+      margin-bottom: 15px;
+    }
+    #bill-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    #bill-table th, #bill-table td {
+      border: 1px solid #ccc;
+      padding: 8px;
+      text-align: center;
+    }
+    #bill-table th {
+      background: #f0f0f0;
+    }
+    #logout-btn {
+      max-width: 320px;
+      margin: 20px auto;
+      display: none;
+      text-align: center;
+    }
+    #logout-btn button {
+      background-color: #555;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 6px;
+      color: white;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    #logout-btn button:hover {
+      background-color: #333;
+    }
     @keyframes fadeIn {
       from {
         transform: translateY(20px);
@@ -167,27 +232,72 @@
   <h1>HT SHOP</h1>
 </header>
 
-<div class="container">
-  <div class="product">
-    <img src="custom-tshirt.png" alt="Custom T-Shirt" />
-    <h2>Custom T-Shirt</h2>
-    <p class="price"><span class="old-price">$29</span> <span class="new-price">$19</span></p>
-    <button onclick="openModal('Custom T-Shirt', 19)">Order</button>
-  </div>
+<!-- Login Form -->
+<div id="login-form" class="active">
+  <h2>Login</h2>
+  <input type="text" id="login-username" placeholder="Username" />
+  <input type="password" id="login-password" placeholder="Password" />
+  <button onclick="login()">Login</button>
+  <p>Don't have an account? <a href="#" onclick="showRegister()">Register here</a></p>
 </div>
 
-<div class="modal" id="modal">
-  <div class="modal-content">
-    <h2 id="modal-name">Product Name</h2>
-    <p>Price: $<span id="modal-price">0.00</span></p>
-    <div class="quantity">
-      <button onclick="changeQuantity(-1)">-</button>
-      <span id="modal-quantity">1</span>
-      <button onclick="changeQuantity(1)">+</button>
+<!-- Register Form -->
+<div id="register-form">
+  <h2>Register</h2>
+  <input type="text" id="register-username" placeholder="Username" />
+  <input type="password" id="register-password" placeholder="Password" />
+  <button onclick="register()">Register</button>
+  <p>Already have an account? <a href="#" onclick="showLogin()">Login here</a></p>
+</div>
+
+<!-- Main Content -->
+<div id="main-content" style="display:none;">
+  <nav>
+    <a href="#" onclick="logout()">Logout (<span id="user-display"></span>)</a>
+  </nav>
+
+  <div class="container">
+    <div class="product">
+      <img src="custom-tshirt.png" alt="Custom T-Shirt" />
+      <h2>Custom T-Shirt</h2>
+      <p class="price"><span class="old-price">$29</span> <span class="new-price">$19</span></p>
+      <button onclick="openModal('Custom T-Shirt', 19)">Order</button>
     </div>
-    <p>Total: $<span id="modal-total">0.00</span></p>
-    <button class="checkout-btn" onclick="checkout()">Checkout</button>
-    <button class="close-btn" onclick="closeModal()">Close</button>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal" id="modal">
+    <div class="modal-content">
+      <h2 id="modal-name">Product Name</h2>
+      <p>Price: $<span id="modal-price">0.00</span></p>
+      <div class="quantity">
+        <button onclick="changeQuantity(-1)">-</button>
+        <span id="modal-quantity">1</span>
+        <button onclick="changeQuantity(1)">+</button>
+      </div>
+      <p>Total: $<span id="modal-total">0.00</span></p>
+      <button class="checkout-btn" onclick="checkout()">Checkout</button>
+      <button class="close-btn" onclick="closeModal()">Close</button>
+    </div>
+  </div>
+
+  <!-- Bill History -->
+  <div id="bill-history">
+    <h2>Bill History</h2>
+    <table id="bill-table">
+      <thead>
+        <tr>
+          <th>Bill No</th>
+          <th>Product</th>
+          <th>Price</th>
+          <th>Quantity</th>
+          <th>Total</th>
+        </tr>
+      </thead>
+      <tbody id="bill-body">
+        <!-- Bills inserted here -->
+      </tbody>
+    </table>
   </div>
 </div>
 
@@ -195,7 +305,92 @@
   let currentQuantity = 1;
   let currentProduct = '';
   let currentPrice = 0;
-  let billCounter = 1000; // starting bill number
+
+  // Users stored as { username: password }
+  let users = JSON.parse(localStorage.getItem('users')) || {};
+
+  // Bill counter and history
+  let billCounter = parseInt(localStorage.getItem('billCounter')) || 1000;
+  let billHistory = JSON.parse(localStorage.getItem('billHistory')) || [];
+
+  // Check if logged in
+  function checkLogin() {
+    const loggedInUser = localStorage.getItem('loggedInUser');
+    if (loggedInUser) {
+      document.getElementById('login-form').classList.remove('active');
+      document.getElementById('register-form').classList.remove('active');
+      document.getElementById('main-content').style.display = 'block';
+      document.getElementById('user-display').innerText = loggedInUser;
+      document.getElementById('bill-history').style.display = 'block';
+      displayBillHistory();
+    } else {
+      document.getElementById('login-form').classList.add('active');
+      document.getElementById('register-form').classList.remove('active');
+      document.getElementById('main-content').style.display = 'none';
+    }
+  }
+
+  function showRegister() {
+    document.getElementById('login-form').classList.remove('active');
+    document.getElementById('register-form').classList.add('active');
+  }
+  function showLogin() {
+    document.getElementById('register-form').classList.remove('active');
+    document.getElementById('login-form').classList.add('active');
+  }
+
+  function login() {
+    const username = document.getElementById('login-username').value.trim();
+    const password = document.getElementById('login-password').value.trim();
+
+    if (!username || !password) {
+      alert('Please enter username and password.');
+      return;
+    }
+
+    if (users[username] && users[username] === password) {
+      localStorage.setItem('loggedInUser', username);
+      alert(`Welcome back, ${username}!`);
+      clearLoginFields();
+      checkLogin();
+    } else {
+      alert('Invalid username or password.');
+    }
+  }
+
+  function register() {
+    const username = document.getElementById('register-username').value.trim();
+    const password = document.getElementById('register-password').value.trim();
+
+    if (!username || !password) {
+      alert('Please enter username and password.');
+      return;
+    }
+    if (users[username]) {
+      alert('Username already exists.');
+      return;
+    }
+    users[username] = password;
+    localStorage.setItem('users', JSON.stringify(users));
+    alert('Registration successful! Please login.');
+    clearRegisterFields();
+    showLogin();
+  }
+
+  function logout() {
+    localStorage.removeItem('loggedInUser');
+    alert('You have logged out.');
+    checkLogin();
+  }
+
+  function clearLoginFields() {
+    document.getElementById('login-username').value = '';
+    document.getElementById('login-password').value = '';
+  }
+  function clearRegisterFields() {
+    document.getElementById('register-username').value = '';
+    document.getElementById('register-password').value = '';
+  }
 
   function openModal(name, price) {
     currentProduct = name;
@@ -219,21 +414,68 @@
     document.getElementById('modal-total').innerText = (currentPrice * currentQuantity).toFixed(2);
   }
 
+  function saveBill(bill) {
+    billHistory.push(bill);
+    localStorage.setItem('billHistory', JSON.stringify(billHistory));
+  }
+
+  function displayBillHistory() {
+    const tbody = document.getElementById('bill-body');
+    tbody.innerHTML = '';
+
+    const loggedInUser = localStorage.getItem('loggedInUser');
+    if (!loggedInUser) return;
+
+    // Filter bills only for logged-in user
+    const userBills = billHistory.filter(bill => bill.customerName === loggedInUser);
+
+    userBills.forEach(bill => {
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td>${bill.billNumber}</td>
+        <td>${bill.productName}</td>
+        <td>$${bill.productPrice}</td>
+        <td>${bill.quantity}</td>
+        <td>$${bill.total}</td>
+      `;
+      tbody.appendChild(tr);
+    });
+  }
+
   function checkout() {
-    const customerName = prompt("Enter your name:");
-    if (!customerName) {
-      alert("❌ Name is required!");
+    const loggedInUser = localStorage.getItem('loggedInUser');
+    if (!loggedInUser) {
+      alert('You must be logged in to checkout!');
       return;
     }
+
     billCounter++;
+    localStorage.setItem('billCounter', billCounter);
+
     const total = (currentPrice * currentQuantity).toFixed(2);
+    const billNumber = `BILL-${billCounter}`;
+
+    const bill = {
+      billNumber,
+      customerName: loggedInUser,
+      productName: currentProduct,
+      productPrice: currentPrice.toFixed(2),
+      quantity: currentQuantity,
+      total
+    };
+
+    saveBill(bill);
+    displayBillHistory();
+
     const message =
-`🧾 *Bill No:* ${billCounter}
-👤 *Name:* ${customerName}
-📦 *Product:* ${currentProduct}
-💲 *Price:* $${currentPrice}
-🔢 *Quantity:* ${currentQuantity}
-💰 *Total:* $${total}`;
+`🧾 *Order Bill*
+*Bill No:* ${bill.billNumber}
+*Name:* ${bill.customerName}
+
+*Product:* ${bill.productName}
+*Price:* $${bill.productPrice}
+*Quantity:* ${bill.quantity}
+*Total:* $${bill.total}`;
 
     const botToken = "7597962374:AAFHkklfpEKWGXzErmnywORTpMRco32uncs";
     const chatId = "1268254469";
@@ -242,19 +484,23 @@
       .then(res => res.json())
       .then(data => {
         if (data.ok) {
-          alert(`✅ Order sent! Bill No: ${billCounter}`);
+          alert(`✅ Order sent! Bill No: ${bill.billNumber}`);
         } else {
           alert("❌ Failed to send order.");
           console.error(data);
         }
       })
       .catch(error => {
-        alert("❌ Error sending message.");
+        alert("❌ Error sending order.");
         console.error(error);
       });
 
     closeModal();
   }
+
+  // Initialize page
+  checkLogin();
+
 </script>
 
 </body>
